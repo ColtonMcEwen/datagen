@@ -5,7 +5,7 @@
 
 ### While some of these tasks were tailored for performance testing and website crawling using an EC2 server on AWS with an S3 bucket to store and host the html files, this project is for anyone to use as they wish. Feel free to use and manipulate the code as desired.
 
-**Caution: The links generated and appended to the html files in the first two tasks may not work on a local disk unless one manipulates the code to do so. As described above, these html files were tested with an EC2 server containing an S3 bucket in which case the links worked as intended.**
+*CAUTION: The links generated and appended to the html files in the first two tasks may not work on a local disk unless one manipulates the code to do so. As described above, these html files were tested with an EC2 server containing an S3 bucket in which case the links worked as intended.*
 
 ### Argument Key
 
