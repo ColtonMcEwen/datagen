@@ -1,0 +1,10 @@
+window
+thread
+money
+toothbrush
+pants
+keyboard
+watch
+deodorant
+ring
+socks
