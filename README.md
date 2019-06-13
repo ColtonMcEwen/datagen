@@ -49,26 +49,27 @@ pip3 install tqdm
 # 1. Process of Adding Links to Cleaned HTML Files
 
 ### Step 1: Downloading .bz2 Files
-This instruction set will use wiki-dump files that are specifically 'dumped' articles from Wikipedia. They change every so often based on month or year so here is the link to the dump files that contain the latest date.
+### Step 1: Downloading .bz2 Files
+This instruction set will use wiki-dump files that are specifically 'dumped' articles from Wikipedia. Here is the link to the current list of dump files. Examples below.
 
 *Link to Dump Files (optional):*
 ```
 ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/
 ```
 
-As an example throughout the instruction set, the links used will contain two small 11-30ish MB `.bz2` files. If there's a desire to download all the files, use the `downloadList.txt` file that contains all the links. Examples below.
+As an example throughout the instruction set, `Example1` links will be used and will contain two small 11-30ish MB `.bz2` files. If there's a desire to download all the files, use the `Example2` link.
 
-*Example1:*
+*Example1 (2 small file links):*
 ```
-wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/YYYYMMDD/enwiki-YYYYMMDD-pages-articles14.xml-p7697599p7744799.bz2
+wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/latest/enwiki-latest-pages-articles14.xml-p7697599p7744799.bz2
 ```
 ```
-wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/YYYYMMDD/enwiki-YYYYMMDD-pages-articles26.xml-p42567204p42663461.bz2
+wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/latest/enwiki-latest-pages-articles26.xml-p42567204p42663461.bz2
 ```
 
-*Example2 (optional, contains all files):*
+*Example2 (optional, downloads all files):*
 ```
-wget -P wiki_dumps -i downloadList.txt
+wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/latest/enwiki-latest-pages-articles[0-9].xml-p*.bz2
 ```
 
 
