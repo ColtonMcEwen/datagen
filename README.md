@@ -49,7 +49,6 @@ pip3 install tqdm
 # 1. Process of Adding Links to Cleaned HTML Files
 
 ### Step 1: Downloading .bz2 Files
-### Step 1: Downloading .bz2 Files
 This instruction set will use wiki-dump files that are specifically 'dumped' articles from Wikipedia. Here is the link to the current list of dump files. Examples below.
 
 *Link to Dump Files (optional):*
