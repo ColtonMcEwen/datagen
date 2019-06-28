@@ -2,7 +2,6 @@ import os
 import re
 import shutil
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-id", "--inputdir", required=True, help="Input existing directory that contains all cleaned html files.")
@@ -24,7 +23,7 @@ def structure(dirname, newdirname):
     i = 1
     for root, dirs, files in os.walk(dirname):
         dirs.sort(key=natural_key)
-        for f in tqdm(sorted(files, key=natural_key), ascii=True):
+        for f in sorted(files, key=natural_key):
             if f.endswith('.html'):
                 os.rename(os.path.join(root, f), str(i)+'.html')
                 i += 1

@@ -1,7 +1,6 @@
 import shutil
 import argparse
 import sys
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-if", "--inputfile", required=True, help="Input text file containing original html file paths.")
@@ -20,7 +19,7 @@ try:
         original = fin1.read().splitlines()
         new = fin2.read().splitlines()
 
-        for file in tqdm(original, ascii=True):
+        for file in original:
             shutil.copyfile(file, new[i])
             i += 1
 

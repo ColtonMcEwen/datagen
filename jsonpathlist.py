@@ -1,7 +1,6 @@
 import os
 import re
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-id", "--inputdir", required=True, help="Input existing directory that contains all the json files.")
@@ -19,7 +18,7 @@ def natural_key(string_):
 def genQuery(word_file):
     for root, dirs, files in os.walk(word_file):
         dirs.sort(key=natural_key)
-        for f in tqdm(sorted(files, key=natural_key), ascii=True):
+        for f in sorted(files, key=natural_key):
             if f.endswith('.json'):
                 list_set = os.path.join(root, f)
 

@@ -1,6 +1,5 @@
 import argparse
 import sys
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-if", "--inputfile", required=True, help="Input existing file that contains all the filepaths of the cleaned html files.")
@@ -10,7 +9,7 @@ source = args["inputfile"]
 try:
     count = 0
     fout = open(source, "r")
-    for line in tqdm(fout, ascii=True):
+    for line in fout:
         line = line.strip()
 
         with open(line, 'r+') as myfile:

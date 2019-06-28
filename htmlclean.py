@@ -2,7 +2,6 @@ import re
 import os
 import shutil
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-id", "--inputdir", required=True, help="Input existing directory that contains all original html files.")
@@ -50,6 +49,6 @@ def write(filename2):
 
 
 for root, dirs, filenames in os.walk(destination):
-    for f in tqdm(filenames, ascii=True):
+    for f in filenames:
         f1 = os.path.join(root, f)
         write(os.path.join(root, f))

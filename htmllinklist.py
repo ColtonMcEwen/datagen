@@ -1,7 +1,6 @@
 import os
 import re
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-id", "--inputdir", required=True, help="Input existing directory that contains all cleaned html files.")
@@ -20,7 +19,7 @@ def linkList(dirpath, pathname):
     fout = open(pathname, "w")
     for root, dirs, filenames in os.walk(dirpath):
         dirs.sort(key=natural_key)
-        for f in tqdm(sorted(filenames, key=natural_key), ascii=True):
+        for f in sorted(filenames, key=natural_key):
             p = os.path.join(root, f)
             b = "<a href=" + "\"" + "/" + p + "\">" + "/" + p + "</a>"
             fout.write(b + '\n')

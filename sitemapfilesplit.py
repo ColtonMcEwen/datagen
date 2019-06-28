@@ -1,7 +1,6 @@
 from itertools import zip_longest
 import os, tempfile
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-if", "--inputfile", required=True, help="Input existing xml file that contains a list of links with filepaths of the cleaned html files.")
@@ -23,7 +22,7 @@ n = 50000
 def generator(filename):
     beginning = """<?xml version="1.0" encoding="UTF-8"?>""" + '\n' + """<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">"""
     with open(filename) as f:
-        for i, g in tqdm(enumerate(grouper(n, f, fillvalue=None)), ascii=True):
+        for i, g in enumerate(grouper(n, f, fillvalue=None)):
             with tempfile.NamedTemporaryFile('r+', delete=False) as fout:
                 fout.write(beginning.rstrip('\r\n') + '\n')
                 for j, line in enumerate(g, 1): # count number of lines in group

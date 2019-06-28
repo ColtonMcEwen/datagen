@@ -1,6 +1,5 @@
 import sys
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-if", "--inputfile", required=True, help="Input existing file that contains a list of all the cleaned html filepaths.")
@@ -27,7 +26,7 @@ try:
 
                                                                                     # open the root file so you can write the links in it
             rootFile = open(fileList[rootFileIndex], 'a')                           # file rootFile = fileList[rootFileIndex]
-            for i in tqdm(range(0, 100), ascii=True):
+            for i in range(0, 100):
                 filelink = fileLinkList[i] + '\n' + '<br>'                          # filelink is a string "<a href=".llllll"
                 rootFile.write(str(filelink))
             rootFile.close()
@@ -36,7 +35,7 @@ try:
             level2FileStartIndex = 1
             level3LinkStartIndex = 100                                              # next available links to add
 
-            for i in tqdm(range(0, 10), ascii=True):                                # outer loop is for opening the file to write links into
+            for i in range(0, 10):                                                  # outer loop is for opening the file to write links into
                 level2File = open(fileList[level2FileStartIndex + i], 'a')          # file level2File = open(fileList[level2FileStartIndex + i])
                 for j in range(0, 10):                                              # inner loop is for adding links to file
                     fileLink = fileLinkList[level3LinkStartIndex + j] + '\n' + '<br>'
@@ -50,7 +49,7 @@ try:
             level3FileStartIndex = 11
             level4LinkStartIndex = 200
 
-            for i in tqdm(range(0, 100), ascii=True):
+            for i in range(0, 100):
                 level3File = open(fileList[level3FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level4LinkStartIndex + j] + '\n' + '<br>'
@@ -64,7 +63,7 @@ try:
             level4FileStartIndex = 111
             level5LinkStartIndex = 1200
 
-            for i in tqdm(range(0, 1000), ascii=True):
+            for i in range(0, 1000):
                 level4File = open(fileList[level4FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level5LinkStartIndex + j] + '\n' + '<br>'
@@ -78,7 +77,7 @@ try:
             level5FileStartIndex = 1111
             level6LinkStartIndex = 11200
 
-            for i in tqdm(range(0, 10000), ascii=True):
+            for i in range(0, 10000):
                 level5File = open(fileList[level5FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level6LinkStartIndex + j] + '\n' + '<br>'
@@ -92,7 +91,7 @@ try:
             level6FileStartIndex = 11111
             level7LinkStartIndex = 111200
 
-            for i in tqdm(range(0, 100000), ascii=True):
+            for i in range(0, 100000):
                 level6File = open(fileList[level6FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level7LinkStartIndex + j] + '\n' + '<br>'
@@ -106,7 +105,7 @@ try:
             level7FileStartIndex = 111111
             level8LinkStartIndex = 1111200
 
-            for i in tqdm(range(0, 1000000), ascii=True):
+            for i in range(0, 1000000):
                 level7File = open(fileList[level7FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level8LinkStartIndex + j] + '\n' + '<br>'
@@ -120,7 +119,7 @@ try:
             level8FileStartIndex = 1111111
             level9LinkStartIndex = 11111200
 
-            for i in tqdm(range(0, 1000000), ascii=True):
+            for i in range(0, 1000000):
                 level8File = open(fileList[level8FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level9LinkStartIndex + j] + '\n' + '<br>'
@@ -134,7 +133,7 @@ try:
             level9FileStartIndex = 11111111
             level10LinkStartIndex = 111111200
 
-            for i in tqdm(range(0, 10000000), ascii=True):
+            for i in range(0, 10000000):
                 level9File = open(fileList[level9FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level10LinkStartIndex + j] + '\n' + '<br>'
@@ -148,7 +147,7 @@ try:
             level10FileStartIndex = 111111111
             level11LinkStartIndex = 1111111200
 
-            for i in tqdm(range(0, 10000000), ascii=True):
+            for i in range(0, 10000000):
                 level10File = open(fileList[level10FileStartIndex + i], 'a')
                 for j in range(0, 10):
                     fileLink = fileLinkList[level11LinkStartIndex + j] + '\n' + '<br>'

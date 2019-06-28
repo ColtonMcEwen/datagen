@@ -1,5 +1,4 @@
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-iname", "--inputname", required=True, help="Input name of new dataset directory.")
@@ -14,7 +13,7 @@ flist = args["outputfile"]
 
 def printFiles(datasetname, numFiles, filelist):
     path = "/"
-    for i in tqdm(range(numFiles), ascii=True):
+    for i in range(numFiles):
         tens = i % 10 + 1
         hundreds = i % 100 + 1
         thousands = i % 1000 + 1

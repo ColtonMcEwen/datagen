@@ -3,7 +3,6 @@ import uuid
 import re
 import argparse
 import sys
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-if", "--inputfile", required=True, help="Input existing file that contains a list of the cleaned html filepaths.")
@@ -29,7 +28,7 @@ try:
         n = 0
         with open(newfile, "w") as fout:
             fin1 = open(filelist, "r")
-            for line in tqdm(fin1, ascii=True):
+            for line in fin1:
                 line = line.strip()
                 with open(line, 'r') as fin2:
                     rf = fin2.read()

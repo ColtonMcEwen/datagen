@@ -1,7 +1,6 @@
 import re
 import random
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-if", "--inputfile", required=True, help="Input existing file that contains all the filepaths of the cleaned html files.")
@@ -58,7 +57,7 @@ for line in fout:
 
 
 outF = open(destination, "w")
-for line in tqdm(phrase_set, ascii=True):
+for line in phrase_set:
   outF.write(line + "\n")
 outF.close()
 

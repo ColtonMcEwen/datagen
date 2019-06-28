@@ -1,7 +1,6 @@
 from itertools import zip_longest
 import os, tempfile
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-if", "--inputfile", required=True, help="Input existing file that contains all json formatted content.")
@@ -22,7 +21,7 @@ n = 11
 
 def generator(filename):
     with open(filename) as f:
-        for i, g in tqdm(enumerate(grouper(n, f, fillvalue=None)), ascii=True):
+        for i, g in enumerate(grouper(n, f, fillvalue=None)):
             with tempfile.NamedTemporaryFile('r+', delete=False) as fout:
                 for j, line in enumerate(g, 1): # count number of lines in group
                     if line is None:

@@ -1,7 +1,6 @@
 import os
 import urllib.parse
 import argparse
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-id", "--inputdir", required=True, help="Input existing directory that contains all cleaned html files.")
@@ -17,7 +16,7 @@ url = args["url"]
 def pathLinks(dirpath, pathname, urladdress):
     fout = open(pathname, "w")
     for root, dirs, filenames in os.walk(dirpath):
-        for f in tqdm(filenames, ascii=True):
+        for f in filenames:
             p = os.path.join(root, f)
             a = urllib.parse.urljoin(str(urladdress), p)
             b = "<url><loc>" + a + "</loc></url>"
