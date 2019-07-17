@@ -155,7 +155,7 @@ python3 htmlappendlink.py -if ds1filepathlist.txt -if1 ds1filelinklist.txt
 #### Arguments
 + First, use the file `ds1filepathlist.txt` containing the list of file paths.
 
-*Example*
+*Example:*
 ```
 python3 htmlformat.py -if ds1filepathlist.txt
 ```
@@ -319,7 +319,7 @@ python3 htmlappendlink.py -if ds4filepathlist.txt -if1 ds4filelinklist.txt
 </html>
 ```
 
-*Example1*
+*Example1:*
 ```
 python3 htmlformat.py -if ds4filepathlist.txt
 ```
@@ -357,7 +357,7 @@ python3 htmlformat.py -if ds4filepathlist.txt
 </html>
 ```
 
-*Example2*
+*Example2:*
 ```
 python3 htmlformat2.py -if ds4filepathlist.txt
 ```
@@ -515,7 +515,7 @@ python3 htmlappendlinkjs.py -if ds4jsfilepathlist.txt -if1 ds4jsfilelinklist.txt
 </html>
 ```
 
-*Example1*
+*Example:*
 ```
 python3 htmlformatjs.py -if ds4jsfilepathlist.txt
 ```
