@@ -5,7 +5,7 @@
 
 ### While some of these tasks were tailored for performance testing and website crawling using an EC2 server on AWS with an S3 bucket to store and host the html files, this project is for anyone to use as they wish. Feel free to use and manipulate the code as desired.
 
-*CAUTION: The links generated and appended to the html files in the first two tasks may not work on a local disk unless one manipulates the code to do so. As described above, these html files were tested with an EC2 server containing an S3 bucket in which case the links worked as intended.*
+*Caution: Links generated and appended to the html files will not work on a local disk unless the code is manipulated to do so. As described above, these html files were tested with an AWS EC2 server containing an S3 bucket in which case the links worked as intended.*
 
 ### Argument Key
 
@@ -26,39 +26,28 @@ python3 htmlclean.py -h
 
 *Note: The instructions in this README file is more of a follow-along, feel free to copy and paste the `highlighted` examples to see what each step does. Otherwise, feel free to tweak it if necessary.*
 
-#### Best results will happen if followed in order.
+#
+#
+# *Best results happen when steps are followed in order -- #1 is required, the rest are optional*
+#
 
-#### IMPORTANT: Before starting, please install the `tqdm` package!!!
-This will show the progress bar of each individual task. Some of these tasks will take awhile so it is very useful to have! It also takes only a few seconds to install. Otherwise, feel free to take out the `import` statements containing `tqdm` at the top of each file and the word `tqdm` in the `for loops` that contain it in each file.
+# **#1**
+### **Downloading, cleaning, and generating static links with  archived wikipedia files**
+#
 
-*Note: Assuming `pip` or `pip3` is installed, use the examples below to install `tqdm`.*
+### **Step 1:**
+**--> Downloading archived wikipedia files <--**
 
-*Example1:*
-```
-pip install tqdm
-```
-
-### **and / or**
-
-*Example2 (Python3):*
-```
-pip3 install tqdm
-```
-
-
-# 1. Process of Adding Links to Cleaned HTML Files
-
-### Step 1: Downloading .bz2 Files
-This instruction set will use wiki-dump files that are specifically 'dumped' articles from Wikipedia. Here is the link to the current list of dump files. Examples below.
-
-*Link to Dump Files (optional):*
+*Website link to archived wikipedia files (reference, not used for examples):*
 ```
 ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/
 ```
 
-As an example throughout the instruction set, `Example1` links will be used and will contain two small 11-30ish MB `.bz2` files. If there's a desire to download all the files, use the `Example2` link.
+Please use examples throughout the instruction set for a better understanding of what is happening. For step 1, `Example1` links will be used and will contain two small 11-30ish MB `.bz2` files. If there's a desire to download all the files, use the `Example2` link.
 
-*Example1 (2 small file links):*
+**Highlight, copy, and paste examples below into a Terminal-based application**
+
+*Example1 (2 links that download 2 small sample files):*
 ```
 wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/latest/enwiki-latest-pages-articles14.xml-p7697599p7744799.bz2
 ```
@@ -66,14 +55,16 @@ wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/latest/en
 wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/latest/enwiki-latest-pages-articles26.xml-p42567204p42663461.bz2
 ```
 
-*Example2 (optional, downloads all files):*
+*Caution: `Example2` will take up several gigabytes of disk space*
+
+*Example2 (optional, link to download all files):*
 ```
 wget -P wiki_dumps ftp://ftpmirror.your.org/pub/wikimedia/dumps/enwiki/latest/enwiki-latest-pages-articles[0-9].xml-p*.bz2
 ```
 
 
-### Step 2: Creating Both Raw HTML and Cleaned HTML Files
-This step is focused on converting the downloaded `bz2` files into cleaned up `html` files.
+### **Step 2:**
+**--> Extracting raw html files into stripped and cleaned html files <--**
 
 #### First
 Make sure the directory containing the `bz2` files are in the directory with all the datagen python files being used.
@@ -111,8 +102,8 @@ python3 htmlclean.py -id ds1rawhtml -od ds1
 
 *Note: This process could take quite some time depending on how many and how big the `bz2` files are.*
 
-### Step 3: Creating a File with a List of File Paths
-This step is focused on creating single text file containing multiple file paths from the ds1 directory that was recently created in the previous step.
+### **Step 3:**
+**--> Creating a file containing a list of file paths <--**
 
 #### Arguments
 + First, use the directory `ds1` containing the cleaned html files.
@@ -123,8 +114,8 @@ This step is focused on creating single text file containing multiple file paths
 python3 htmlpathlist.py -id ds1 -of ds1filepathlist.txt
 ```
 
-### Step 4: Creating a File with a List of Links Containing File Paths
-This step is focused on creating single text file containing multiple links containing file paths from the ds1 directory that was created in step 2.
+### **Step 4:**
+**--> Creating a file containing a list of links with file paths <--**
 
 #### Arguments
 + First, use the directory `ds1` containing the cleaned html files.
@@ -135,14 +126,10 @@ This step is focused on creating single text file containing multiple links cont
 python3 htmllinklist.py -id ds1 -of ds1filelinklist.txt
 ```
 
-*Note: This will put all the URL links into one file*
+### **Step 5:**
+**--> Appending a hierarchy of static links onto multiple html files <--**
 
-### Step 5: Appending File Link List to Directory Containing Cleaned HTML Files
-This step is focused on appending (adding) our links from `ds1filelinklist.txt` to our `ds1` directory containing the cleaned html files.
-
-*Note: This will go in a specific order as scripted in the python3 file we are about to run. It will have a root file containing 100 links at the bottom of the file. Then the next 10 files after that will each contain 10 unique links. Then the next 100 files will each contain 10 unique links. So on an so forth.*
-
-*Note: This will make changes to the directory containing the cleaned html files. It would be wise to make an original copy in case the links don't turn out exactly as hoped.*
+*Note: This will make changes to the directory containing the cleaned html files. Make a backup original copy from the example below.*
 
 Use the directory `ds1` containing the cleaned html files and then the new name of the original copy ex. `ds1_original`
 
@@ -150,6 +137,8 @@ Use the directory `ds1` containing the cleaned html files and then the new name 
 ```
 cp -r ds1 ds1_original
 ```
+
+*Note: This script will go in a specific order from the `python3` file we are about to run. It will have a `root` file containing `100 links` at the end of the file. Then, the next `10 files` will contain `10 links` each. Then, the next `100 files` will contain `10 links` each. So on an so forth.*
 
 #### Arguments
 + First, use the file `ds1filepathlist.txt` containing the list of file paths.
@@ -160,10 +149,8 @@ cp -r ds1 ds1_original
 python3 htmlappendlink.py -if ds1filepathlist.txt -if1 ds1filelinklist.txt
 ```
 
-*Note: This command may show anywhere from 1-10 progress bars. It represents how many levels deep the links will be in the `ds1`. If the last progress bar shows `0%`, it means that your `ds1` folder was less than 10 levels deep. Nothing to worry about.
-
-### Step 6: Create Proper HTML Format For Each File
-This step is focused creating proper HTML format for performance testing purposes.
+### **Step 6:**
+**--> Properly format each html file for future validation testing <--**
 
 #### Arguments
 + First, use the file `ds1filepathlist.txt` containing the list of file paths.
@@ -173,29 +160,27 @@ This step is focused creating proper HTML format for performance testing purpose
 python3 htmlformat.py -if ds1filepathlist.txt
 ```
 
-*Note: This could take a while depending on how big and how many files being used.*
+*Note: This could take a while depending on how big and how many files are being used.*
 
-Now there should be an edited directory containing cleaned html files with links appended to them. Then a file containing a list of file paths of the cleaned html files. Finally there should also be a file containing a list of links with their associated file paths.
-
-For testing, click on the first file inside the directory with the cleaned html files, then scroll down the 100 links added to the file. Click on the first of the 100 links and it should lead to the first file out of ten which contain 10 links each file. Keep clicking on the first link and it should have about 5-6 levels of links.
+To see if it worked, click on the first file `00.html` inside the `ds1` directory. Scroll to the bottom and it should show `100 links` added to the file.
 
 
-# 2. Restructuring Directory Tree with New File Paths and Links
+# **#2**
+### **Restructuring hierarchy with new file paths and links**
+#
 
-### Step 1: Getting Rid of Subdirectories and Renaming HTML Files
-This step is focused on getting rid of the subdirectories like `1, 2, 3...` and `AA`. This will also rename all the html files with a number corresponding to how many files there are.
+### **Step 1:**
+**--> Move files from one temporary directory to the other <--**
 
-#### First
-Make sure all the files are still in the root directory or a specified directory being used from the above process of adding links to html files. They will be needed!
-
-*Note: This is a transition phase.*
-
-Before anything else at this point, create a temporary copy ex. `ds1tmp` of the original directory `ds1_original` created earlier.
+Create a temporary copy `ds1tmp` of the original directory `ds1_original` created earlier.
 
 *Example:*
 ```
 cp -r ds1_original ds1tmp
 ```
+
+#### First
+Make sure all the generated text files and directories are still in the main directory from the process above. They will be needed!
 
 #### Arguments
 + First, use the temporary directory `ds1tmp` just created.
@@ -213,8 +198,8 @@ Then delete the temporary directory `ds1tmp` since it's now empty.
 rm -r ds1tmp
 ```
 
-### Step 2: Creating a File Path List For New Temporary Directory
-This step is focused on creating a new file path list for the temporary directory `ds4tmp` we just created.
+### **Step 2:**
+**--> Creating a file containing a list of file paths for temporary directory <--**
 
 #### Arguments
 + First, use the temporary directory `ds4tmp` containing the cleaned html files.
@@ -225,31 +210,32 @@ This step is focused on creating a new file path list for the temporary director
 python3 htmlpathlist.py -id ds4tmp -of ds4tmpfilepathlist.txt
 ```
 
-### Step 3: Creating New Directory Dataset Containing Several Facet Directories
-This step will create a new directory and new subdirectories that will act as file paths with facets.
+### **Step 3:**
+**--> Creating a hierarchal directory structure 5-6 levels deep <--**
 
 #### Arguments
 + First, create a new directory ex. `ds4` that will contain all the subdirectories/facets.
-+ Second, determine the number of files ex. `100000`
++ Second, determine the number of directories ex. `100000`
 
 *Example:*
 ```
 python3 htmlfacetdir.py -iname ds4 -inum 100000
 ```
-### Step 4: Creating a File with a List of File Paths
-This step is focused on creating single text file containing file paths from the `ds4` directory that was created earlier.
+### **Step 4:**
+**--> Creating a file containing a list of file paths for new directory <--**
 
 #### Arguments
 + First, use the directory `ds4` containing the cleaned html files.
-+ Second, create a new name for the text file ex. `ds4filepathlist.txt` that will contain all the URL links in relation to their file paths.
++ Second, determine the number of files ex. `100000`
++ Third, create a new name for the text file ex. `ds4filepathlist.txt` that will contain all the URL links in relation to their file paths.
 
 *Example:*
 ```
 python3 htmlfacetdirpathlist.py -iname ds4 -inum 100000 -of ds4filepathlist.txt
 ```
 
-### Step 5: Copy Cleaned HTML Files to New Dataset Directory
-This step will go through and copy each file in the new directory `ds4` we created to their new respective file paths.
+### **Step 5:**
+**--> Copy files from temporary directory to the new directory <--**
 
 #### Arguments
 + First, we will need the temporary text file `ds4tmpfilepathlist.txt` containing the file paths of the temporary directory `ds4tmp`
@@ -260,26 +246,23 @@ This step will go through and copy each file in the new directory `ds4` we creat
 python3 htmlcopy.py -if ds4tmpfilepathlist.txt -if1 ds4filepathlist.txt
 ```
 
-### Step 6: Creating a File with a List of Links Containing File Paths
-This step is focused on creating single text file containing multiple links containing file paths from the `ds4` directory that was created earlier.
+### **Step 6:**
+**--> Creating a file containing a list of links with file paths of new directory <--**
 
 #### Arguments
 + First, use the directory `ds4` containing the cleaned html files.
-+ Second, create a new name for the text file ex. `ds4filelinklist.txt` that will contain all the URL links in relation to their file paths.
++ Second, determine the number of files ex. `100000`
++ Third, create a new name for the text file ex. `ds4filelinklist.txt` that will contain all the URL links in relation to their file paths.
 
 *Example:*
 ```
 python3 htmlfacetdirlinklist.py -iname ds4 -inum 100000 -of ds4filelinklist.txt
 ```
 
-*Note: This will put all the URL links into one file*
+### **Step 7:**
+**--> Appending a hierarchy of static links onto multiple html files <--**
 
-### Step 7: Appending File Link List to Directory Containing Cleaned HTML Files
-This step is focused on appending (adding) our links from `ds4filelinklist.txt` to our `ds4` directory containing the cleaned html files.
-
-*Note: This will go in a specific order as scripted in the python3 file we are about to run. It will have a root file containing 100 links at the bottom of the file. Then the next 10 files after that will each contain 10 unique links. Then the next 100 files will each contain 10 unique links. So on an so forth.*
-
-*Note: This will make changes to the directory containing the cleaned html files. It's recommended to make a copy.*
+*Note: This will make changes to the directory containing the cleaned html files. Make a backup original copy from the example below.*
 
 Use the directory `ds4` containing the cleaned html files and then the new name of the original copy ex. `ds4_original`
 
@@ -287,6 +270,8 @@ Use the directory `ds4` containing the cleaned html files and then the new name 
 ```
 cp -r ds4 ds4_original
 ```
+
+*Note: This script will go in a specific order from the `python3` file we are about to run. It will have a `root` file containing `100 links` at the end of the file. Then, the next `10 files` will contain `10 links` each. Then, the next `100 files` will contain `10 links` each. So on an so forth.*
 
 #### Arguments
 + First, use the file `ds4filepathlist.txt` containing the list of file paths.
@@ -297,20 +282,20 @@ cp -r ds4 ds4_original
 python3 htmlappendlink.py -if ds4filepathlist.txt -if1 ds4filelinklist.txt
 ```
 
-### Step 8: Create Proper HTML Format For Each File
-This step is focused creating proper HTML format for performance testing purposes.
+### **Step 8:**
+**--> Properly format each html file for future validation testing <--**
 
 #### Arguments
 + First, use the file `ds4filepathlist.txt` containing the list of file paths.
 + Second, there's a way to format the html documents **without** the metadata as facets, that is, use the first example.
 
-*Note: The first example will not use the text files `type.txt`, `file_extension.txt`, `company.txt`, `name.txt`, and `filename.txt`. These files are specifically for the second example.*
+*Note: The first example will NOT use the following text files `type.txt`, `file_extension.txt`, `company.txt`, `name.txt`, and `filename.txt`. These files are specifically for the second example.*
 
 *Note: Depending on what is desired, it's best to **chose one or the other to execute**. Look at examples below to see what the results look like.*
 
-**IMPORTANT: This first example will add the following information at the beginning and ending of each `html` file in `ds4`.**
+**IMPORTANT: This first example will add the following information at the beginning and ending of each file in `ds4`.**
 
-*Note: the `<title>` information will be different per file.*
+*Note: the `<title>...</title>` tag information will be different per file.*
 
 **Beginning:**
 ```
@@ -343,7 +328,7 @@ python3 htmlformat.py -if ds4filepathlist.txt
 
 **IMPORTANT: This second example will add the following information at the beginning and ending of each `html` file in `ds4`.**
 
-*Note: the `<meta>` and `<title>` information will be different per file.*
+*Note: the `<meta>` and `<title>...</title>` information will be different per file.*
 
 **Beginning:**
 ```
@@ -377,37 +362,193 @@ python3 htmlformat.py -if ds4filepathlist.txt
 python3 htmlformat2.py -if ds4filepathlist.txt
 ```
 
-*Note: This could take a while depending on how big and how many files there are.*
+*Note: This could take a while depending on how big and how many files are being used.*
 
-There should now be a new edited directory containing cleaned html files with links appended to them. Then a file containing a list of file paths of the cleaned html files. Finally there should also be a file containing a list of links with their associated file paths.
-
-For testing, click on the first file inside the directory with the cleaned html files, scroll down and there should be the first 100 links added to the file. Click on the on the first of the 100 links and it should direct to first file which contains 10 links to each of those files. This should continue to do this for several levels.
+To see if it worked, click on the first file `1.html` inside the `ds4` directory. Scroll to the bottom and it should show `100 links` added to the file.
 
 
-# 3. Creating XML Formatted Sitemaps
+# **#3**
+### **Generating dynamic links with html files containing javascript code**
+#
 
-### Step 1: Generating Sitemaps
-This step is focused on generating sitemaps in xml format and extension.
+### **Step 1:**
+**--> Move files from one temporary directory to the other <--**
+
+Create a temporary copy `ds1jstmp` of the original directory `ds1_original` created earlier.
+
+*Example:*
+```
+cp -r ds1_original ds1jstmp
+```
 
 #### First
-Make sure all the files are still in the root directory or a specified directory being used from the above process of adding links to html files. They will be needed!
+Make sure all the generated text files and directories are still in the main directory from the process above. They will be needed!
+
+#### Arguments
++ First, use the temporary directory `ds1jstmp` just created.
++ Second, move the files into another temporary directory `ds4jstmp` that will contain all the cleaned html files without subdirectories.
+
+*Example:*
+```
+python3 htmlrestructure.py -id ds1jstmp -od ds4jstmp
+```
+
+Then delete the temporary directory `ds1jstmp` since it's now empty.
+
+*Example:*
+```
+rm -r ds1jstmp
+```
+
+### **Step 2:**
+**--> Creating a file containing a list of file paths for temporary directory <--**
+
+#### Arguments
++ First, use the temporary directory `ds4jstmp` containing the cleaned html files.
++ Second, create a new name for the temporary text file ex. `ds4jstmpfilepathlist.txt` that will contain all the file paths.
+
+*Example:*
+```
+python3 htmlpathlist.py -id ds4jstmp -of ds4jstmpfilepathlist.txt
+```
+
+### **Step 3:**
+**--> Creating a hierarchal directory structure 5-6 levels deep <--**
+
+#### Arguments
++ First, create a new directory ex. `ds4js` that will contain all the subdirectories/facets.
++ Second, determine the number of directories ex. `100000`
+
+*Example:*
+```
+python3 htmlfacetdir.py -iname ds4js -inum 100000
+```
+### **Step 4:**
+**--> Creating a file containing a list of file paths for new directory <--**
+
+#### Arguments
++ First, use the directory `ds4js` containing the cleaned html files.
++ Second, determine the number of files ex. `100000`
++ Third, create a new name for the text file ex. `ds4jsfilepathlist.txt` that will contain all the URL links in relation to their file paths.
+
+*Example:*
+```
+python3 htmlfacetdirpathlist.py -iname ds4js -inum 100000 -of ds4jsfilepathlist.txt
+```
+
+### **Step 5:**
+**--> Copy files from temporary directory to the new directory <--**
+
+#### Arguments
++ First, we will need the temporary text file `ds4jstmpfilepathlist.txt` containing the file paths of the temporary directory `ds4jstmp`
++ Second, we will need the new text file `ds4jsfilepathlist.txt` containing the new file paths of the directory `ds4js`
+
+*Example:*
+```
+python3 htmlcopy.py -if ds4jstmpfilepathlist.txt -if1 ds4jsfilepathlist.txt
+```
+
+### **Step 6:**
+**--> Creating a file containing a list of links with file paths of new directory <--**
+
+#### Arguments
++ First, use the directory `ds4js` containing the cleaned html files.
++ Second, determine the number of files ex. `100000`
++ Third, create a new name for the text file ex. `ds4jsfilelinklist.txt` that will contain all the URL links in relation to their file paths.
+
+*Example:*
+```
+python3 htmlfacetdirlinklistjs.py -iname ds4js -inum 100000 -of ds4jsfilelinklist.txt
+```
+
+### **Step 7:**
+**--> Appending a hierarchy of static links onto multiple html files <--**
+
+*Note: This will make changes to the directory containing the cleaned html files. Make a backup original copy from the example below.*
+
+Use the directory `ds4js` containing the cleaned html files and then the new name of the original copy ex. `ds4js_original`
+
+*Example:*
+```
+cp -r ds4js ds4js_original
+```
+
+*Note: This script will go in a specific order from the `python3` file we are about to run. It will have a `root` file containing `100 links` at the end of the file. Then, the next `10 files` will contain `10 links` each. Then, the next `100 files` will contain `10 links` each. So on an so forth.*
+
+#### Arguments
++ First, use the file `ds4jsfilepathlist.txt` containing the list of file paths.
++ Second, use the file `ds4jsfilelinklist.txt` containing the list of links with their corresponding file paths.
+
+*Example:*
+```
+python3 htmlappendlinkjs.py -if ds4jsfilepathlist.txt -if1 ds4jsfilelinklist.txt
+```
+
+### **Step 8:**
+**--> Properly format each html file for future validation testing <--**
+
+#### Arguments
++ First, use the file `ds4jsfilepathlist.txt` containing the list of file paths.
++ Second, there's a way to format the html documents **without** the metadata as facets, that is, use the first example.
+
+*Note: the `<title>...</title>` tag information will be different per file.*
+
+**Beginning:**
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>ds4/1/1/1/1/1/1.html</title>
+</head>
+
+<body onload="linklist();">
+
+...(CONTENT OF FILE)...
+```
+
+**Ending:**
+```
+...(CONTENT OF FILE)...
+</body>
+</html>
+```
+
+*Example1*
+```
+python3 htmlformatjs.py -if ds4jsfilepathlist.txt
+```
+
+*Note: This could take a while depending on how big and how many files are being used.*
+
+To see if it worked, click on the first file `1.html` inside the `ds4` directory. Scroll to the bottom and it should show `100 links` added to the file.
+
+
+# **#4**
+### **Creating xml formatted sitemap files**
+#
+
+### **Step 1:**
+**--> Generate sitemap files with proper xml formatting <--**
+
+#### First
+Make sure all the generated text files and directories are still in the main directory from the above processes. They will be needed!
 
 #### Arguments
 + First, use the directory `ds1` containing the cleaned html files.
 + Second, create a new name for the `xml` file ex. `ds1sitemap.xml` that will contain all the URL links in relation to their file paths.
 + Finally, use the URL link to add to the file paths. As an example, an AWS server containing a bucket is used ex. `https://s3-us-west-2.amazonaws.com/test.bucket/`
 
+*Note: Emphasis on the `https://` before the actual URL link!*
+
 *Example:*
 ```
 python3 sitemaplinklist.py -id ds1 -of ds1sitemap.xml -u https://s3-us-west-2.amazonaws.com/test.bucket/
 ```
 
-*Note: Make sure to put `https://` before the actual URL link!*
-
-*Note: This will put all the URL links into one file*
-
-### Step 2: Evenly Divide URLs Across Multiple Files
-This step will sort ALL the URLs from the newly created `xml` file into multiple `xml` files with a limit of 50,000 URLs per file.
+### **Step 2:**
+**--> Divide up and sort urls across multiple sitemap files <--**
 
 #### Arguments
 + First, create a new directory ex. `ds1sitemap` for our `xml` files to go into.
@@ -421,7 +562,7 @@ mkdir ds1sitemap
 python3 sitemapfilesplit.py -if ds1sitemap.xml
 ```
 
-*Note: Don't freak out if there are a bunch of `xml` files littered in the directory. Once the process is finished, move them into the recently created directory `ds1sitemap` created for the `xml` files.*
+*Caution: There will be multiple `xml` files littered in the directory. Once the process is finished, move them into the recently created directory `ds1sitemap` created for the `xml` files.*
 
 *Example:*
 ```
@@ -431,13 +572,15 @@ mv sitemap*.xml ds1sitemap
 Now there should be properly formatted `xml` files that contain URL links with their respective html file paths from the directory containing html files.
 
 
-# 4. Creating a Random Generated Query List
+# **#5**
+### **Creating a file containing a randomly generated query list**
+#
 
-### Step 1: Generate the Query List
-This step is focused on generating a query list containing random and duplicated 1, 2, 3, and 4 token words.
+### **Step 1:**
+**--> Generate a query list file containing random and duplicated 1, 2, 3, and 4 token words <--**
 
 #### First
-Make sure all the files are still in the root directory or a specified directory being used from the above process of adding links to html files. They will be needed!
+Make sure all the generated text files and directories are still in the main directory from the above processes. They will be needed!
 
 #### Arguments
 + First, use the text file `ds1filepathlist.txt` containing the list of file paths created earlier.
@@ -448,16 +591,18 @@ Make sure all the files are still in the root directory or a specified directory
 python3 queryrandomlist.py -if ds1filepathlist.txt -of ds1querylist.txt
 ```
 
-Now there should be a generated and randomized query list.
+Now there should be a generated, randomized, and duplicated query list of 1-4 token words.
 
 
-# 5. Creating JSON Files and a List of JSON File Paths
+# **#6**
+### **Creating json files containing facet data**
+#
 
-### Step 1: Creating JSON Files and Generating a List of JSON File Paths
-This step is focused on generating a list of json files with proper formatting by adding a few facets for future testing. Also to create a list of json file paths into a single text file.
+### **Step 1:**
+**--> Creating json files from a file containing a list of json file paths <--**
 
 #### First
-Make sure all the files are still in the root directory or a specified directory being used from the above process of adding links to html files. They will be needed!
+Make sure all the generated text files and directories are still in the main directory from the above processes. They will be needed!
 
 #### Second
 This will generate all the text into a single text file with proper `json` formatting.
@@ -476,7 +621,7 @@ mkdir ds1jsonfacetpath
 python3 jsontempfile.py -if ds1filepathlist.txt -of ds1jsonfacetpath.txt
 ```
 
-### **and / or**
+### **AND / OR**
 
 *Example2:*
 ```
@@ -493,11 +638,11 @@ This will split the text into multiple files per html file with proper `json` fo
 #### Arguments
 + First, use the temporary file `ds1jsonfacetpath.txt` and/or `ds1jsonfacetdata.txt` created earlier.
 
-*Note: Don't freak out if there are a bunch of `json` files littered in the directory. Once the process is finished, move them into the recently created directory created for the `json` files.*
+*Caution: There will be a bunch of `json` files littered in the directory. Once the process is finished, move them into the recently created directory created for the `json` files.*
+
+*Caution: Ignore the warnings when running some of the examples below.*
 
 *Example1:*
-
-**Ignore the Warning!**
 ```
 python3 jsonfilesplit.py -if ds1jsonfacetpath.txt
 ```
@@ -505,11 +650,9 @@ python3 jsonfilesplit.py -if ds1jsonfacetpath.txt
 find . -name "*.json" -maxdepth 1 -exec sh -c 'mv "$@" "$0"' ds1jsonfacetpath {} +
 ```
 
-### **and / or**
+### **AND / OR**
 
 *Example2:*
-
-**Ignore the Warning!**
 ```
 python3 jsonfilesplit.py -if ds1jsonfacetdata.txt
 ```
@@ -517,7 +660,7 @@ python3 jsonfilesplit.py -if ds1jsonfacetdata.txt
 find . -name "*.json" -maxdepth 1 -exec sh -c 'mv "$@" "$0"' ds1jsonfacetdata {} +
 ```
 
-*Note: This will take awhile depending on how many html files there are. The whole process could take anywhere from a few minutes to an hour.*
+*Note: This will take awhile depending on how many html files there are.*
 
 #### Fourth
 This will generate a list of `json` file paths.
@@ -531,7 +674,7 @@ This will generate a list of `json` file paths.
 python3 jsonpathlist.py -id ds1jsonfacetpath -of ds1jsonpathlistfacetpath.txt
 ```
 
-### **and / or**
+### **AND / OR**
 
 *Example2:*
 ```
