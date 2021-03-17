@@ -28,11 +28,10 @@ python3 htmlclean.py -h
 
 #
 #
-# *Best results happen when steps are followed in order -- #1 is required, the rest are optional*
+## *Best results happen when steps are followed in order -- #1 is required, the rest are optional*
 #
 
-# **#1**
-### **Downloading, cleaning, and generating static links with  archived wikipedia files**
+## **#1** **Downloading, cleaning, and generating static links with  archived wikipedia files**
 #
 
 ### **Step 1:**
@@ -165,8 +164,7 @@ python3 htmlformat.py -if ds1filepathlist.txt
 To see if it worked, click on the first file `00.html` inside the `ds1` directory. Scroll to the bottom and it should show `100 links` added to the file.
 
 
-# **#2**
-### **Restructuring hierarchy with new file paths and links**
+## **#2** **Restructuring hierarchy with new file paths and links**
 #
 
 ### **Step 1:**
@@ -367,8 +365,7 @@ python3 htmlformat2.py -if ds4filepathlist.txt
 To see if it worked, click on the first file `1.html` inside the `ds4` directory. Scroll to the bottom and it should show `100 links` added to the file.
 
 
-# **#3**
-### **Generating dynamic links with html files containing javascript code**
+## **#3** **Generating dynamic links with html files containing javascript code**
 #
 
 ### **Step 1:**
@@ -525,8 +522,7 @@ python3 htmlformatjs.py -if ds4jsfilepathlist.txt
 To see if it worked, click on the first file `1.html` inside the `ds4` directory. Scroll to the bottom and it should show `100 links` added to the file.
 
 
-# **#4**
-### **Creating xml formatted sitemap files**
+## **#4** **Creating xml formatted sitemap files**
 #
 
 ### **Step 1:**
@@ -572,8 +568,7 @@ mv sitemap*.xml ds1sitemap
 Now there should be properly formatted `xml` files that contain URL links with their respective html file paths from the directory containing html files.
 
 
-# **#5**
-### **Creating a file containing a randomly generated query list**
+## **#5** **Creating a file containing a randomly generated query list**
 #
 
 ### **Step 1:**
@@ -594,8 +589,7 @@ python3 queryrandomlist.py -if ds1filepathlist.txt -of ds1querylist.txt
 Now there should be a generated, randomized, and duplicated query list of 1-4 token words.
 
 
-# **#6**
-### **Creating json files containing facet data**
+## **#6** **Creating json files containing facet data**
 #
 
 ### **Step 1:**
